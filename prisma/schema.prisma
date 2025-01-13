@@ -20,4 +20,14 @@ model User{
   lastName  String
   imageUrl  String?
   skills    String[]
+  project   Project[]
+}
+
+model Project{
+  id            String @id @default(uuid())
+  title         String
+  description   String
+  techStack     String[]
+  user          User   @relation(fields: [userId], references: [id])
+  userId        String
 }

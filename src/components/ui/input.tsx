@@ -1,22 +1,25 @@
-import * as React from "react";
+type Inputprops = {
+    placeholder:string,
+    label:string,
+    name:string,
+    type:string
+    value?:string
+    font?:string
+    onchange:(e: React.ChangeEvent<HTMLInputElement>)=>void
+    onKeyDown?:(e: React.KeyboardEvent<HTMLInputElement>)=>void
+}
 
-import { cn } from "@/lib/utils";
-
-const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
-  ({ className, type, ...props }, ref) => {
+export default function InputField({onchange,onKeyDown ,placeholder, type, value,name,label}:Inputprops) {
     return (
-      <input
-        type={type}
-        className={cn(
-          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
-          className
-        )}
-        ref={ref}
-        {...props}
-      />
-    );
-  }
-);
-Input.displayName = "Input";
-
-export { Input };
+        <div className="flex flex-col gap-3 w-[70%] justify-center  px-3 ">
+            <label className="font-semibold font-serif text-xl items-start">{label}</label>
+            <input className="border-[1px] border-gray-600 rounded-md px-3 py-3 outline-none"
+                onChange={onchange}
+                onKeyDown={onKeyDown} 
+                type={type}
+                name={name}
+                value={value}
+                placeholder={placeholder}/>
+        </div>
+    )
+}

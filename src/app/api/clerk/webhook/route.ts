@@ -3,12 +3,14 @@ import { NextRequest } from "next/server";
 
 export const POST = async(req:NextRequest)=>{
     const {data} = await req.json()
+    console.log(data,   "This is the data")
     const email = data.email_addresses[0].email_address
     const firstName = data.first_name
     const lastName = data.last_name
     const imageUrl = data.image_url
     await prisma.user.create({
         data:{
+            id:data.id,
             email:email,
             firstName:firstName,
             lastName:lastName,
