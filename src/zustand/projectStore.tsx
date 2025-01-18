@@ -1,38 +1,35 @@
-import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
+import { create } from "zustand"
+import { devtools, persist } from "zustand/middleware"
 
-// Define the store state interface
-interface FormState {
-  formState: number
-  increaseFormState: () => void
-  decreaseFormState: () => void
+interface ProjectDetails {
+  name: string;
+  description: string;
+  createdAt: string;
+  repoUrl: string;
+  deploymentLink: string;
+  languagesUse: string[];
 }
 
-// Create the store with proper typing
-const formStateStore = (set: any) => ({
-  formState: 0,
-  increaseFormState: () => 
-    set((state: FormState) => ({ 
-      formState: state.formState + 1 
-    })),
-  decreaseFormState: () => 
-    set((state: FormState) => ({ 
-      formState: state.formState - 1 
-    })),
-})
+type ProjectVal = {
+  projectDetail: ProjectDetails | null; 
+  setProject: (project: ProjectDetails) => void;
+  clearProject: () => void;
+};
 
-// Create the store with middleware
-const useFormStateStore = create<FormState>()(
+
+const useProjectStateStore = create<ProjectVal>()(
   devtools(
-    persist(formStateStore, {
-      name: "form-state",
-      version: 1, // Add version for future migrations
-    })
+    persist(
+      (set) => ({
+        projectDetail: null, 
+        setProject: (project) => set({ projectDetail: project }),
+        clearProject: () => set({ projectDetail: null }),
+      }),
+      {
+        name: "project-state", 
+      }
+    )
   )
-)
+);
 
-export default useFormStateStore
-
-// Example usage:
-// const formState = useFormStateStore((state) => state.formState)
-// const { increaseFormState, decreaseFormState, resetFormState, setFormState } = useFormStateStore()
+export default useProjectStateStore;

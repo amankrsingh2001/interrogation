@@ -107,8 +107,5 @@ export default function AddSkills(){
           })}
           </div>
 </div>
-
-        
-
      
 }
