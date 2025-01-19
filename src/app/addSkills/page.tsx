@@ -71,6 +71,7 @@ export default function AddSkills(){
             })
             try {
                 const res = await axios.post('/api/skills',data)
+                console.log(res)
                 if(res.status == 200){
                     router.push('/addProject')
                 }

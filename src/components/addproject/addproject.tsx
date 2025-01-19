@@ -49,9 +49,14 @@ export default function Addproject({
   const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const { data } = await axios.get<any, any>(
+      const response = await axios.get<any, any>(
         `https://api.github.com/repos/${projectval.username}/${projectval.repoName}`
       );
+      console.log(response,"This is the response")
+      
+      const { data } = response
+      
+
       const { name, languages_url, created_at, homepage, clone_url } = data;
 
       const projectLang: string[] = await langUse(
@@ -70,7 +75,7 @@ export default function Addproject({
         repoUrl: clone_url,
         deploymentLink: homepage,
       };
-
+      increaseFormState();
        
     const setProject = useProjectStateStore.getState().setProject;
         setProject(repoDetails);
@@ -83,7 +88,7 @@ export default function Addproject({
       }
     }
 
-    increaseFormState();
+    
   };
 
   return (

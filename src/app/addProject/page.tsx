@@ -1,43 +1,15 @@
-"use client";
 
-import AddIcon from "@/components/icon/AddIcon";
-import Addproject from "@/components/project";
-import ProjectDetails from "@/components/projectDetails";
-import useFormStateStore from "@/zustand/formStore";
-import { useState } from "react";
 
-export default function Project() {
-  const [addProject, setAddProject] = useState<boolean>(false);
-  const formState = useFormStateStore((state) => state.formState);
-  const increaseFormState = useFormStateStore(
-    (state) => state.increaseFormState
-  );
+import Homeproject from "@/components/addproject/Homeproject";
+import ProjectList from "@/components/addproject/projectList";
 
-  console.log(formState);
+export default async function (){
+  
 
-  const buttonClickHandler = () => {
-    increaseFormState();
-    console.log(formState);
-  };
+  return <div className="flex flex-col">
 
-  return (
-    <div className="flex flex-col p-4">
-      <div className="flex justify-between">
-        <h1 className="text-2xl font-bold font-serif">My Projects</h1>
-        <div className="flex bg-black text-white text-md font-semibold font-serif py-2 px-3 rounded-md gap-2">
-          <AddIcon />
-          <button className="" onClick={buttonClickHandler}>
-            {" "}
-            Add project
-          </button>
-        </div>
-      </div>
+      <Homeproject/>
+    <ProjectList/>
 
-      {formState === 1 && (
-        <Addproject addProject={addProject} setAddProject={setAddProject} />
-      )}
-
-      {formState === 2 && <ProjectDetails />}
-    </div>
-  );
+  </div>
 }

@@ -32,7 +32,8 @@ export default function RegisterInput({onchange,onKeyDown ,placeholder, type, va
                     type={type}
                     name={name}
                     value={value}
-                    placeholder={placeholder}/> 
+                    placeholder={placeholder}
+                    /> 
            
         </div>
     )
