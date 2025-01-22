@@ -57,7 +57,9 @@ export default function Addproject({
       const { data } = response
       
 
-      const { name, languages_url, created_at, homepage, clone_url } = data;
+      const { name, languages_url, created_at, homepage, clone_url, description } = data;
+
+      
 
       const projectLang: string[] = await langUse(
         languages_url,
@@ -69,7 +71,7 @@ export default function Addproject({
 
       const repoDetails: ProjectDetails = {
         name,
-        description:'',
+        description:description,
         languagesUse: projectLang,
         createdAt: date,
         repoUrl: clone_url,

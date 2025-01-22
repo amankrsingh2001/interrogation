@@ -16,3 +16,4 @@ export const langUse = async(url:string, username:string, reponame:string):Promi
     console.log(data,"This is the project lang")
     return languages
 }
+

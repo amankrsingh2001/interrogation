@@ -8,19 +8,19 @@ import { motion } from 'framer-motion';
 interface ProjectCardProps {
   name: string
   description: string
-  liveLink: string
-  repoLink: string
-  languages?: string[]
-  createdAt: string
+  liveLink: any
+  repoUrl: string
+  langUse?: string[]
+  createAt: string
 }
 
 export default function ProjectCard({
   name,
   description,
   liveLink,
-  repoLink,
-  languages = [],
-  createdAt
+  repoUrl,
+  langUse,
+  createAt
 }: ProjectCardProps) {
 
 
@@ -40,7 +40,7 @@ export default function ProjectCard({
             Live Demo
           </a>
           <a
-            href={repoLink}
+            href={repoUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-gray-200 transition-colors duration-200"
@@ -49,11 +49,11 @@ export default function ProjectCard({
             Repository
           </a>
         </div>
-        {languages.length > 0 && (
+        {langUse !== undefined &&  langUse.length > 0  && (
           <div className="mb-4">
             <h3 className="text-sm font-semibold text-gray-600 dark:text-gray-400 mb-2">Technologies:</h3>
             <div className="flex flex-wrap gap-2">
-              {languages.map((lang, index) => (
+              {langUse.map((lang, index) => (
                 <motion.span
                   key={index}
                   className="inline-block bg-gray-200 dark:bg-gray-700 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 dark:text-gray-300"
@@ -69,7 +69,7 @@ export default function ProjectCard({
         )}
         <div className="text-sm text-gray-600 dark:text-gray-400 flex items-center">
           <Code2 size={16} className="mr-1" />
-          Created: {new Date(createdAt).toLocaleDateString()}
+          Created: {createAt}
         </div>
       </div>
 

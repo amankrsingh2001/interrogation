@@ -5,9 +5,9 @@ import { NextRequest, NextResponse } from "next/server"
 export const POST = async(req:NextRequest)=>{
 
         const {name, description, createdAt, repoUrl, deploymentLink, languagesUse} = await req.json()
-        console.log(name, description, createdAt, repoUrl, deploymentLink, languagesUse)
+        
         const {userId} = await auth()
-        console.log(userId,"User id is req")
+       
         if(!userId){
             return NextResponse.json({
                 success:false,
@@ -32,6 +32,7 @@ export const POST = async(req:NextRequest)=>{
         }
         return NextResponse.json({
             success:true,
-            message:"Project Added Successfully"
+            message:"Project Added Successfully",
+            
         })
 }

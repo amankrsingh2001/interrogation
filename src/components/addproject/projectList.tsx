@@ -1,54 +1,43 @@
 
-import axios from "axios";
+
+import { getProjects } from "@/lib/action";
 import ProjectCard from "../ui/project-Card";
 
-const projects = [
-  {
-    name: "Task Manager App",
-    description:
-      "A full-stack application for managing daily tasks and projects.",
-    liveLink: "https://task-manager.example.com",
-    repoLink: "https://github.com/yourusername/task-manager",
-    languages: ["React", "Node.js", "MongoDB"],
-    createdAt: "2023-03-15",
-  },
-  {
-    name: "Weather Forecast Widget",
-    description:
-      "A responsive widget that displays real-time weather information.",
-    liveLink: "https://weather-widget.example.com",
-    repoLink: "https://github.com/yourusername/weather-widget",
-    languages: ["JavaScript", "CSS", "OpenWeatherMap API"],
-    createdAt: "2023-04-22",
-  },
-  {
-    name: "E-commerce Platform",
-    description:
-      "A scalable e-commerce solution with user authentication and payment integration.",
-    liveLink: "https://shop.example.com",
-    repoLink: "https://github.com/yourusername/ecommerce-platform",
-    languages: ["Next.js", "Stripe", "PostgreSQL"],
-    createdAt: "2023-05-10",
-  },
-];
+
+
+interface ProjectCardProps {
+  name: string
+  description: string
+  liveLink: any
+  repoUrl: string
+  langUse?: string[]
+  createAt: string
+}
 
 export default async function ProjectList() {
 
- 
+    const projects:ProjectCardProps[] = await getProjects()
+
 
   return (
-    <div className="flex flex-wrap gap-4">
-      {/* {projects.map((project, index) => (
-        <ProjectCard
-          key={index}
-          name={project.name}
-          description={project.description}
-          liveLink={project.liveLink}
-          repoLink={project.repoLink}
-          languages={project.languages}
-          createdAt={project.createdAt}
-        />
-      ))} */}
+    <div className="flex flex-wrap gap-4 border-2 min-w-md p-8 border-900-gray">
+      {
+       ( projects !== undefined && projects.length >0 )? <div className="flex flex-wrap  gap-4">
+        {
+            projects.map((project, index)=>{
+              return <div className="flex" key={index}>
+                  <ProjectCard name={project.name} description={project.description}
+                    liveLink={project.liveLink} repoUrl = {project.repoUrl} langUse={project.langUse} createAt={project.createAt}
+
+                  />
+                </div>
+
+            })    
+        }    
+       </div>:<div>
+        <p>You haven't added any project</p>
+       </div> 
+      }
     </div>
   );
 }

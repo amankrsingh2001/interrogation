@@ -19,14 +19,15 @@ type Inputprops = {
     onKeyDown?:(e: React.KeyboardEvent<HTMLInputElement>)=>void
     register?:any 
     getValues?:any 
+    errors?:any
 }
 
-export default function RegisterInput({onchange,onKeyDown ,placeholder, type, value ,name,label, register, getValues}:Inputprops) {
+export default function RegisterInput({onchange, onKeyDown ,placeholder, type, value ,name,label, register, getValues, errors}:Inputprops) {
     
     return (
         <div className="flex flex-col gap-3 w-[70%] justify-center">
             <label className="font-semibold font-serif text-md items-start">{label}</label>
-                <input  {...register(name)} className="border-[1px] border-gray-600 rounded-md px-3 py-2 bg-gray-700 text-white shadow-md outline-none"
+                <input  {...register(name,{required:`${name.toUpperCase()} is required`})} className="border-[1px] border-gray-600 rounded-md px-3 py-2   shadow-md outline-none"
                     onChange={onchange}
                     onKeyDown={onKeyDown} 
                     type={type}
@@ -34,6 +35,9 @@ export default function RegisterInput({onchange,onKeyDown ,placeholder, type, va
                     value={value}
                     placeholder={placeholder}
                     /> 
+               {errors[name] && (
+        <p style={{ color: "red" }}>{errors[name]?.message}</p>
+      )}
            
         </div>
     )
