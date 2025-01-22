@@ -35,11 +35,11 @@ export default function Homeproject() {
             Add project
           </button>
 
-          <button className="flex text-white text-md items-center font-semibold font-serif py-2 px-3 rounded-md gap-2 bg-black" >
+          {/* <button className="flex text-white text-md items-center font-semibold font-serif py-2 px-3 rounded-md gap-2 bg-black" >
             {" "}
             <FaTeamspeak />
           Start Interview
-          </button>
+          </button> */}
         </div>
 
        
