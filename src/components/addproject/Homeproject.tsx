@@ -7,10 +7,12 @@ import ProjectList from "@/components/addproject/projectList";
 import useFormStateStore from "@/zustand/formStore";
 import { useState } from "react";
 import { FaTeamspeak } from "react-icons/fa";
+import { useRouter } from "next/navigation";
 
 export default function Homeproject() {
   const [addProject, setAddProject] = useState<boolean>(false);
   const formState = useFormStateStore((state) => state.formState);
+  const router = useRouter()
   const increaseFormState = useFormStateStore(
     (state) => state.increaseFormState
   );
@@ -21,6 +23,10 @@ export default function Homeproject() {
     increaseFormState();
     console.log(formState);
   };
+
+  const interViewClickHandler = ()=>{
+    router.push('/instruction')
+  }
 
   return (
     <div className="flex flex-col p-4">
@@ -35,15 +41,15 @@ export default function Homeproject() {
             Add project
           </button>
 
-          {/* <button className="flex text-white text-md items-center font-semibold font-serif py-2 px-3 rounded-md gap-2 bg-black" >
+         <button className="flex text-white text-md items-center font-semibold font-serif py-2 px-3 rounded-md gap-2 bg-black" onClick={interViewClickHandler}>
             {" "}
             <FaTeamspeak />
           Start Interview
-          </button> */}
-        </div>
+          </button> 
+        </div> 
 
        
-        {/* <ProjectList/> */}
+
       </div>
 
       {formState === 1 && (
